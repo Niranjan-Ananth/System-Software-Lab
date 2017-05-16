@@ -1,0 +1,24 @@
+%token ID NUMBER NL
+%left '+' '-'
+%left '*' '/'
+%%
+stmt : exp NL {printf("Valid\n"); exit(0);}
+;
+exp : exp '+' exp
+|exp '-' exp
+|exp '*' exp
+|exp '/' exp
+|'(' exp ')'
+|NUMBER
+|ID
+;
+%%
+int yyerror(char * msg){
+    printf("Invalid\n");
+    exit(0);
+}
+
+int main(){
+    yyparse();
+    return 0;
+}
